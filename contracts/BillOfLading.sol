@@ -3,6 +3,8 @@ pragma solidity ^0.8.7;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
+// @dev stack to deep without compiler optimization
+
 contract BillOfLading {
 
     struct Bill {
