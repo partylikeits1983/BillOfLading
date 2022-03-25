@@ -46,6 +46,7 @@ contract BillOfLading {
         uint ID = BillID[msg.sender].length;
 
         Bills[msg.sender][ID].seller = msg.sender;
+        Bills[msg.sender][ID].transport = transport;
         Bills[msg.sender][ID].buyer = buyer;
         Bills[msg.sender][ID].token = token;
         Bills[msg.sender][ID].status = true;
@@ -56,7 +57,7 @@ contract BillOfLading {
         Bills[msg.sender][ID].shipmentFee = shipmentFee;
         Bills[msg.sender][ID].classification = classification;
 
-        BillID.push(ID);
+        BillID[msg.sender].push(ID);
 
         return value;
 
@@ -70,7 +71,7 @@ contract BillOfLading {
 
         uint payment = Bills[seller][ID].value;
 
-        ERC20(token).transferFrom(msg.sender, address(this), payment);
+        IERC20(token).transferFrom(msg.sender, address(this), payment);
 
         return payment;
 
@@ -130,6 +131,8 @@ contract BillOfLading {
 
         IERC20(token).transfer(msg.sender, payment);
 
+        return true;
+
 
 
     }
@@ -141,7 +144,6 @@ contract BillOfLading {
         return payment;
 
     }
-
 
 
 }
